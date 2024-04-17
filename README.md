@@ -1,5 +1,3 @@
 # Katas
 
-## Kata 1 : Produits
-
-
+- [Kata 1 : Produits](./produits/)
