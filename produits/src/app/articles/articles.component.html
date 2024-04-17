@@ -1,0 +1,9 @@
+@for (article of $any(articles$ | async); track $index) {
+    <div>
+        <p>{{article.productName ? article.productName : 'Article inconnu'}}</p> 
+        <p>{{article.category ? article.category : 'N/A'}}</p>
+    </div>
+}
+@empty {
+    Pas de produits disponibles :-(
+}
