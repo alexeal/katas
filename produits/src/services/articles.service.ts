@@ -7,9 +7,14 @@ import { Article } from '../models/article.model';
     providedIn: 'root',
 })
 export class ArticlesService {
+    // TODO : un BehaviorSubject ?
     constructor() { }
 
     public getArticles(): Observable<Array<Article>> {
         return of(ProduitsData);
+    }
+
+    updateArticles() {
+        // TODO; Add/Remove article from articles list
     }
 }

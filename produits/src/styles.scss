@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+// TODO: CSS
+.card {
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #00000020;
+    border-radius: 0.8rem;
+    width: 11em;
+    padding: 2em;
+}
+
+.btn {
+    font-family: Raleway;
+    font-weight: 0;
+    font-size: 14px;
+    color: #fff;
+    // background: linear-gradient(90deg, #3d00cc 0%, #bf00c9 100%);
+    padding: 1em;
+    border: solid #486480 2px;
+    box-shadow: rgb(122, 122, 122) 2px 3px 3px -2px;
+    border-radius: 6px;
+    transition: 481ms;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.btn:hover {
+    transition: 481ms;
+    padding: 1.25em;
+    transform: translateY(-0px);
+    // background: linear-gradient(90deg, #bf00c9 0%, #3d00cc 100%);
+    color: #ffffff;
+    border: solid 2px #33485c;
+}

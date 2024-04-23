@@ -2,6 +2,7 @@
     <div>
         <p>{{article.productName ? article.productName : 'Article inconnu'}}</p> 
         <p>{{article.category ? article.category : 'N/A'}}</p>
+        <button (click)="addArticleToCart(article)">ADD</button>
     </div>
 }
 @empty {
