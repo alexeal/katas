@@ -1,5 +1,6 @@
+/* *********************** JS KATAS FROM CODEWARS.COM ************************  */
+
 /* **************************************** MASKIFY KATA *********************************************** */
-//  Source: https://www.codewars.com
 //  Usually when you buy something, you're asked whether your credit card number, phone number 
 //  or answer to your most secret question is still correct. However, since someone could look over 
 //  your shoulder, you don't want that shown on your screen. Instead, we mask it.
@@ -40,7 +41,6 @@ function maskify(cc) {
 }
 
 /* **************************************** PLAYING WITH DIGITS KATA ***************************************** */
-// Source: https://www.codewars.com
 // Given two positive integers n and p, we want to find a positive integer k, if it exists, such 
 // that the sum of the digits of n raised to consecutive powers starting from p is equal to k * n.
 // In other words, writing the consecutive digits of n as a, b, c, d ..., is there an integer k such that :
@@ -70,7 +70,6 @@ function digPow(n, p){
 }
 
 /* ****************** SUM OF SMALLEST NUMBERS OF AN ARRAY ********************** */
-//  Source: https://www.codewars.com
 //  Create a function that returns the sum of the two lowest positive numbers 
 //  given an array of minimum 4 positive integers. 
 //  No floats or non-positive integers will be passed.
@@ -96,7 +95,6 @@ function sumTwoSmallestNumbers(numbers) {
 const sumTwoSmallestNumbers = numbers => numbers.sort((x, y) => x - y).slice(0, 2).reduce((x, y) => x + y);
 
 /* ****************** EXES AND OHS ********************** */
-//  Source: https://www.codewars.com
 //  Check to see if a string has the same amount of 
 //  'x's and 'o's. The method must return a boolean and be 
 //  case insensitive. The string can contain any char.
@@ -124,7 +122,6 @@ function XO(str) {
 }
 
 /* *********************** PERSISTENT BUGGER **********************  */
-//  Source: https://www.codewars.com
 // Write a function, persistence, that takes in a positive 
 // parameter num and returns its multiplicative persistence, 
 // which is the number of times you must multiply the digits 
@@ -154,7 +151,6 @@ function persistence(num, cnt=0) {
 }
 
 /* ************************* LIST FILTERING ************************  */
-//  Source: https://www.codewars.com
 // In this kata you will create a function that takes 
 // a list of non-negative integers and strings and returns a new list 
 // with the strings filtered out.
@@ -163,7 +159,7 @@ function filter_list(l) {
   return l.filter((item) => !(typeof item === 'string' || item instanceof String));
 }
 
-/* ************************* COMPLEMENTARY DNA ************************  */
+/* *********** *********** COMPLEMENTARY DNA ************************  */
 //  Source: https://www.codewars.com
 /* ****************************************************************** */
 // Iteration 1
@@ -189,10 +185,45 @@ function dnaStrand(dna){
   }
   return str;
 }
-
 // Iteration 3
 var letters = {'A':'T','T':'A','C':'G','G':'C'};
 
 function dnaStrand(dna){
   return dna.split('').map((letter) => letters[letter]).join('');
 }
+
+/* *********************** YOUR ORDER, PLEASE ************************  */
+// Your task is to sort a given string. 
+// Each word in the string will contain a single number. 
+// This number is the position the word should have in the result.
+// "is2 Thi1s T4est 3a"  -->  "Thi1s is2 3a T4est"
+/* ******************************************************************** */
+// Using a regex to compare only the numbers
+function order(words){
+  return words
+  .split(' ')
+  .sort((a, b) => a.match(/\d+/)[0] - b.match(/\d+/)[0])
+  .join(' ');
+}
+
+/* ************£***** EXTRACT DOMAIN NAME FROM URL *******************  */
+// Write a function that when given a URL as a string, 
+// Ex: https://google.com --> google
+/* ******************************************************************** */
+// 1st iteration
+function domainName(url){
+  return url
+    .replace('www.', '')
+    .slice(0, url.replace('www.', '').indexOf("."))
+    .replace('http://', '')
+    .replace('https://', '');
+}
+// 2nd iteration
+function domainName(url){
+    url = url
+        .replace('www.', '')
+        .replace('http://', '')
+        .replace('https://', '');
+    return url.split('.')[0];
+}
+// Code to improve because it won't work with cowww.com
