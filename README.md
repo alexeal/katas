@@ -6,4 +6,4 @@
 - [[JS] Few katas made in JS on codewars](./katas-codewars.js)
 
 
-Codewars' profile: [alexeal](https://www.codewars.com/users/alexeal/badges/large)
+Codewars' profile: [alexeal](https://www.codewars.com/users/alexeal/)
