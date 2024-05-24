@@ -150,7 +150,7 @@ function persistence(num, cnt=0) {
     persistence(arrayNum.reduce((x,y) => x*y), ++cnt)
 }
 
-/* ************************* LIST FILTERING ************************  */
+/* ************************* LIST FILTERING ************************* */
 // In this kata you will create a function that takes 
 // a list of non-negative integers and strings and returns a new list 
 // with the strings filtered out.
@@ -159,9 +159,7 @@ function filter_list(l) {
   return l.filter((item) => !(typeof item === 'string' || item instanceof String));
 }
 
-/* *********** *********** COMPLEMENTARY DNA ************************  */
-//  Source: https://www.codewars.com
-/* ****************************************************************** */
+/* ************************ COMPLEMENTARY DNA ************************ */
 // Iteration 1
 function dnaStrand(dna){
   let str = '';
@@ -192,7 +190,7 @@ function dnaStrand(dna){
   return dna.split('').map((letter) => letters[letter]).join('');
 }
 
-/* *********************** YOUR ORDER, PLEASE ************************  */
+/* ************************ YOUR ORDER, PLEASE ************************ */
 // Your task is to sort a given string. 
 // Each word in the string will contain a single number. 
 // This number is the position the word should have in the result.
@@ -206,7 +204,7 @@ function order(words){
   .join(' ');
 }
 
-/* ************£***** EXTRACT DOMAIN NAME FROM URL *******************  */
+/* ******************* EXTRACT DOMAIN NAME FROM URL ******************* */
 // Write a function that when given a URL as a string, 
 // Ex: https://google.com --> google
 /* ******************************************************************** */
@@ -227,3 +225,64 @@ function domainName(url){
     return url.split('.')[0];
 }
 // Code to improve because it won't work with cowww.com
+
+/* ******************* THE HASTAG GENERATOR ******************* */
+// 1st iteration
+function generateHashtag (str) {
+  hashtag=str
+              .replace("#", "")
+              .split(' ')
+              .map((word) => { 
+                  return word ? word[0].toUpperCase() + word.substring(1) : ' ';
+              }).join(" ").replace(/ /g, '');
+  return hashtag.length !== 0 && hashtag.length < 140 ? "#".concat(hashtag) : false;
+}
+// 2nd iteration
+function generateHashtag (str) {
+  var hashtag = str.split(' ').reduce(function(tag, word) {
+    return tag + word.charAt(0).toUpperCase() + word.substring(1);
+  }, '#');
+  return hashtag.length == 1 || hashtag.length > 140 ? false : hashtag;
+}
+
+/* ****************************** WHO LIKES IT ****************************** */
+// Input (array)                     -->  Output (string)
+// []                                -->  "no one likes this"
+// ["Peter"]                         -->  "Peter likes this"
+// ["Jacob", "Alex"]                 -->  "Jacob and Alex like this"
+// ["Max", "John", "Mark"]           -->  "Max, John and Mark like this"
+// ["Alex", "Jacob", "Mark", "Max"]  -->  "Alex, Jacob and 2 others like this"
+/* ************************************************************************** */
+// Solution submitted
+function likes(names) {
+  names = names || [];
+  switch(names.length){
+    case 0: return 'no one likes this'; break;
+    case 1: return names[0] + ' likes this'; break;
+    case 2: return names[0] + ' and ' + names[1] + ' like this'; break;
+    case 3: return names[0] + ', ' + names[1] + ' and ' + names[2] + ' like this'; break;
+    default: return names[0] + ', ' + names[1] + ' and ' + (names.length - 2) + ' others like this';
+  }
+}
+// Interesting solution given on codewars
+function likes(names) {
+  return {
+    0: 'no one likes this',
+    1: `${names[0]} likes this`, 
+    2: `${names[0]} and ${names[1]} like this`, 
+    3: `${names[0]}, ${names[1]} and ${names[2]} like this`, 
+    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`, 
+  }[Math.min(4, names.length)]
+}
+
+/* ****************************** SUM OF DIGITS ****************************** */
+// Input (number) -->  Output (number)
+// 16  -->  1 + 6 = 7
+// 942  -->  9 + 4 + 2 = 15  -->  1 + 5 = 6
+// 132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
+// 493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
+/* *************************************************************************** */
+// Congruence Formula (https://en.wikipedia.org/wiki/Digital_root)
+function digitalRoot(n) {
+  return (n-1) % 9 + 1;
+}
