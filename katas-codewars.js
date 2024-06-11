@@ -286,3 +286,57 @@ function likes(names) {
 function digitalRoot(n) {
   return (n-1) % 9 + 1;
 }
+
+/* ********************************** ROT13 ********************************** */
+// ROT13 (Rotate13, "rotate by 13 places", sometimes hyphenated ROT-13) is a
+// simple letter substitution cipher that replaces a letter with the 13th 
+// letter after it
+// Input (string) -->  Output (string)
+// A --> N
+// "EBG13 rknzcyr." --> "ROT13 example."
+// "This is my first ROT13 excercise!" --> "Guvf vf zl svefg EBG13 rkprepvfr!"
+/* *************************************************************************** */
+// Solution given: rotation +13
+ function rot13(str) {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(/[a-z]/gi, letter => alphabet[alphabet.indexOf(letter) + 13]);
+}
+// Interesting solution given on codewars, cleaner
+const rot13 = str =>
+  str.replace(/[a-z]/gi, val => String.fromCharCode(val.charCodeAt() + (/[a-m]/i.test(val) ? 13 : -13)));
+// Another solution would be a dictionnary and a loop, but I find this too much work for a simple required result 
+
+/* ****************************** GREED IS GOOD ****************************** */
+function score( dice ) {
+  const counter = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 };
+
+  for (let i = 0; i < dice.length; i++) {
+    counter[dice[i]]++
+  }
+
+  const totalScore = Object.values(counter).reduce((accumulator, currentValue, i) => {
+    if (i === 0) {
+      return accumulator + (currentValue % 3) * 100 + Math.trunc(currentValue / 3) * 1000
+    } else if (i === 4) {
+      return accumulator + (currentValue % 3) * 50 + Math.trunc(currentValue / 3) * 500
+    } else {
+      return accumulator + Math.trunc(currentValue / 3) * ((i + 1) * 100)
+    }
+  }, 0);
+
+  return totalScore;
+}
+
+/* ****************************** PICK PEAKS ****************************** */
+function pickPeaks(arr){
+    const response = { pos: [], peaks: [] };
+    for (let index = 1; i < arr.length - 1; i++) {
+        let cursor = 1;
+        while (arr[index] === arr[index + cursor]) next++;
+        if (arr[index] > arr[index - 1] && arr[index] > arr[index + cursor]) {
+            response.pos.push(index);
+            response.peaks.push(arr[index]);
+        };
+    };
+    return response;
+}
