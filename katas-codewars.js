@@ -340,3 +340,102 @@ function pickPeaks(arr){
     };
     return response;
 }
+
+/* ****************************** INT32 TO IPv4 ****************************** */
+// Given an unsigned integer
+// Get IP address, ex:
+// 2149583361 ==> "128.32.10.1"
+// 32         ==> "0.0.0.32"
+// 0          ==> "0.0.0.0"
+/* *************************************************************************** */
+function int32ToIp(int32){
+  // convert to binary then complete with 0 to get 32bits
+  let binaryNumber = int32.toString(2).padStart(32, '0');
+  let buffer = [];
+  let result = [];
+  let i = 8; // 32bits = 4bytes = 4*8bits
+  // get an array of 4 bytes
+  for (let index = 0; index < 4; index++) {
+    buffer[index] = binaryNumber.slice(i - 8, i);
+    i += 8;
+    if (!buffer[index]) {
+      buffer[index] = '0';
+    }
+  }
+  // convert each bytes into integer
+  for (let i = 0; i < buffer.length; i++) {
+    result[i] = parseInt(buffer[i], 2);
+  }
+  return result.toString().replace(/,/g, '.');
+}
+
+/* ************************** HUMAN READABLE DURATION FORMAT ************************** */
+/*
+    Your task in order to complete this Kata is to write a function which formats a duration, given as a number of seconds, in a human-friendly way.
+
+    The function must accept a non-negative integer. If it is zero, it just returns "now". Otherwise, the duration is expressed as a combination of years, days, hours, minutes and seconds.
+
+    It is much easier to understand with an example:
+
+    For seconds = 62, your function should return 
+        "1 minute and 2 seconds"
+    For seconds = 3662, your function should return
+        "1 hour, 1 minute and 2 seconds"
+*/
+/* ************************************************************************************ */
+// First iteration, basics
+function formatDuration (seconds){
+  if(seconds == 0) return "now";
+  var s = {
+    "year" : (60 * 60 * 24 * 365),
+    "day" : (60 * 60 * 24),
+    "hour" : (60 * 60),
+    "minute" : 60
+  }
+  var output = new Array();
+  var years = Math.floor(seconds / s.year);
+  if(years > 0){
+    output.push(years + " year" + (years == 1 ? "" : "s"));
+    seconds = seconds % s.year;
+  }
+  var days = Math.floor(seconds / s.day);
+  if(days > 0){
+    output.push(days + " day" + (days == 1 ? "" : "s"));
+    seconds = seconds % s.day;
+  }
+  var hours = Math.floor(seconds / s.hour);
+  if(hours > 0){
+    output.push(hours + " hour" + (hours == 1 ? "" : "s"));
+    seconds = seconds % s.hour;
+  }
+  var minutes = Math.floor(seconds / s.minute);
+  if(minutes > 0){
+    output.push(minutes + " minute" + (minutes == 1 ? "" : "s"));
+    seconds = seconds % s.minute;
+  }
+  if(seconds > 0){
+    output.push(seconds + " second" + (seconds == 1 ? "" : "s"));
+  }
+  if(output.length > 1){
+    var last = output.pop();
+    return output.join(", ") + " and " + last;
+  } else {
+    return output[0];
+  }
+}
+// Refactoring (with the help of MDN docs and Google)
+function formatDuration (seconds) {
+  if (seconds === 0) return 'now';
+  // 1 minute = 60 seconds
+  // 1 hour = 3600 seconds
+  // 1 day = 86400 seconds
+  // 1 year = 31536000 seconds
+  const date = { year: 31536000, day: 86400, hour: 3600, minute: 60, second: 1 };
+  const readableDate = [];
+  for (const key in date) {
+    let curr = Math.floor(seconds / date[key]);
+    if (curr) readableDate.push(`${curr} ${key}${curr !== 1 ? 's' : ''}`);
+    seconds %= date[key];
+  }
+  return readableDate.length > 1 ? readableDate.join(', ').replace(/, ([^,]+)$/, ' and $1') : readableDate[0];
+}
